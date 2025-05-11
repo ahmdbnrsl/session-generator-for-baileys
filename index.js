@@ -21,6 +21,7 @@
     const mongoURL = process.env.MONGODB_URI || "";
     const dbName = process.env.DB_NAME || "";
     const collName = process.env.COLL_NAME || "";
+    const waNumber = process.env.WA_NUMBER || "";
 
     const mongoClient = new MongoClient(mongoURL);
     await mongoClient.connect();
@@ -63,8 +64,7 @@
         if (!!qr && !isPaired[0]) {
             isPaired[0] = true;
             console.log("Waiting for it...");
-            const phoneNumber = "6288216018165";
-            const code = await sock.requestPairingCode(phoneNumber);
+            const code = await sock.requestPairingCode(waNumber);
             console.log("YOUR CODE : ", code);
         }
 
