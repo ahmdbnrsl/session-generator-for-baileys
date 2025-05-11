@@ -19,11 +19,12 @@
     require("dotenv").config();
 
     const mongoURL = process.env.MONGODB_URI || "";
+    const dbName = process.env.DB_NAME || "";
     const collName = process.env.COLL_NAME || "";
 
     const mongoClient = new MongoClient(mongoURL);
     await mongoClient.connect();
-    const collection = mongoClient.db("wa-send-message").collection("api_20");
+    const collection = mongoClient.db(dbName).collection(collName);
     const isPaired = [false];
 
     const { state, saveCreds } = await useMongoDBAuthState(collection);
